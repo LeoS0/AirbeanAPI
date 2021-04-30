@@ -1,0 +1,25 @@
+{
+  "name": "airbeanapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmandaCambroneroWatson/AirbeanAPI.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmandaCambroneroWatson/AirbeanAPI/issues"
+  },
+  "homepage": "https://github.com/AmandaCambroneroWatson/AirbeanAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0",
+    "nodemon": "^2.0.7",
+    "uuid": "^8.3.2"
+  }
+}
