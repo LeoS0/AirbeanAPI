@@ -1,3 +1,18 @@
 {
-  "accounts": []
+  "accounts": [
+    {
+      "userID": 1,
+      "username": "test",
+      "password": "pwd",
+      "orderID": 10
+    }
+  ],
+  "orders": [
+    {
+      "orderID": 1,
+      "menuID": 2,
+      "userID": 1,
+      "eta": 2
+    }
+  ]
 }
