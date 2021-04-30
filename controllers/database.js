@@ -29,36 +29,33 @@ function addAccount(body) {
 
 function addOrder(body) {
   const order = body;
-  const orderID = 1;
-  const eta = Math.floor(Math.random() * 10);
+  let orderID = Math.floor(Math.random() * 100) + 1;
+  let eta = Math.floor(Math.random() * 10) + 2;
+  let time = moment().format('H:m');
 
-  database.get('orders').push({ orderID: orderID, menuID: order.menuID, userID: order.userID, eta: eta }).write();
+  if (database.get('orders').find({ orderID: orderID }).value()) {
+    orderID = Math.floor(Math.random() * 100) + 1;
+  }
 
-  return 'Done';
+  database.get('orders').push({ orderID: orderID, menuID: order.menuID, userID: order.userID, eta: eta, time: time }).write();
+
+  return `Order Added. ID: ${orderID} ETA: ${eta} min`;
 }
 
-/*
-{
-  accounts: 
-  [
-    {
-      userID: 1
-      username: test
-      password: test,
-      orderID: 1923
-    }
-  ],
-  orders: [
-    {
-      orderID: 1923,
-      menuID: 2,
-      userID: 1,
-      eta: 3
-    }
-  ]
+function getOrder(ID) {
+  const userID = parseInt(ID);
+  const orderHistory = database.get('orders').filter({ userID: userID }).value();
+
+  let timeNow = moment().format('H:m');
+  let timeBefore = parseInt(database.get('orders').filter({ userID: userID }).map('time').value());
+
+  console.log(timeBefore);
+  console.log('Time:', timeNow);
+
+  return orderHistory;
 }
-*/
 
 exports.initiateDatabase = initiateDatabase;
 exports.addAccount = addAccount;
 exports.addOrder = addOrder;
+exports.getOrder = getOrder;

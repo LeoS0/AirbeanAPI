@@ -1,18 +1,13 @@
 {
-  "accounts": [
-    {
-      "userID": 1,
-      "username": "test",
-      "password": "pwd",
-      "orderID": 10
-    }
-  ],
+  "accounts": [],
   "orders": [
     {
-      "orderID": 1,
-      "menuID": 2,
+      "orderID": 43,
+      "menuID": 3,
       "userID": 1,
-      "eta": 2
+      "eta": 9,
+      "startHour": "14",
+      "startMin": "31"
     }
   ]
 }
