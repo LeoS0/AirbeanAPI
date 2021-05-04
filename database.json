@@ -1,21 +1,34 @@
 {
-  "accounts": [],
-  "orders": [
+  "accounts": [
     {
-      "orderID": 78,
-      "menuID": 4,
-      "userID": 7,
-      "eta": 9,
-      "startHour": 12,
-      "startMinute": 4
+      "userID": "2",
+      "username": "test2",
+      "password": "pwd2"
     },
     {
-      "orderID": 20,
-      "menuID": 4,
+      "userID": "1",
+      "username": "test",
+      "password": "pwd"
+    }
+  ],
+  "orders": [
+    {
+      "orderID": 17,
+      "menuID": 3,
       "userID": 2,
-      "eta": 7,
-      "startHour": 12,
-      "startMinute": 5
+      "eta": 2,
+      "startHour": 13,
+      "startMinute": 27,
+      "status": "Tidigare Beställning"
+    },
+    {
+      "orderID": 43,
+      "menuID": 3,
+      "userID": 1,
+      "eta": 2,
+      "startHour": 13,
+      "startMinute": 30,
+      "status": "Tidigare Beställning"
     }
   ]
 }

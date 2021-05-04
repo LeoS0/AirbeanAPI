@@ -39,7 +39,18 @@ function addOrder(body) {
     orderID = Math.floor(Math.random() * 100) + 1;
   }
 
-  database.get('orders').push({ orderID: orderID, menuID: order.menuID, userID: order.userID, eta: eta, startHour: startHour, startMinute:startMinute }).write();
+  database
+    .get('orders')
+    .push({
+      orderID: orderID,
+      menuID: order.menuID,
+      userID: order.userID,
+      eta: eta,
+      startHour: startHour,
+      startMinute: startMinute,
+      status: 'Pågående Beställning',
+    })
+    .write();
 
   return `Order Added. ID: ${orderID} ETA: ${eta} min`;
 }
@@ -49,19 +60,21 @@ function getOrder(ID) {
   const orderHistory = database.get('orders').filter({ userID: userID }).value();
 
   let timeNowHour = parseInt(moment().format('H'));
-  let timeNowMinute = parseInt (moment().format('m'));
-  let timeBeforeHour = parseInt(database.get('orders').filter({ userID: userID }).map('startHour').value());
-  let timeBeforeMinute = parseInt(database.get('orders').filter({ userID: userID }).map('startMinute').value());
-  
-  //console.log('Time:', timeNow);
-  //console.log(timeBefore);
+  let timeNowMinute = parseInt(moment().format('m'));
+  let timeBeforeHour = database.get('orders').filter({ userID: userID }).map('startHour').value();
+  let timeBeforeMinute = database.get('orders').filter({ userID: userID }).map('startMinute').value();
+  let eta = database.get('orders').filter({ userID: userID }).map('eta').value();
 
-  //timeNowHour.subtrack(timeBeforeHour - startHour);
-  //timeNowMinute.subtrack(timeBeforeMinute - startMinute);
- 
-  console.log(timeBeforeHour);
-  //console.log(timeNowHour);
-  //console.log(`After manipulation:',${timeNow.toString()}`)
+  let timeDifference;
+
+  for (let i = 0; i < timeBeforeHour.length; i++) {
+    timeDifference = timeNowMinute - timeBeforeMinute[i];
+    if (timeDifference > eta[i]) {
+      database.get('orders').find({ status: 'Pågående Beställning' }).assign({ status: 'Tidigare Beställning' }).write();
+    } else {
+      database.get('orders').find({ status: 'Pågående Beställning' }).assign({ status: 'Pågående Beställning' }).write();
+    }
+  }
 
   return orderHistory;
 }
