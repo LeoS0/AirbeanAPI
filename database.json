@@ -29,6 +29,15 @@
       "startHour": 13,
       "startMinute": 30,
       "status": "Tidigare Beställning"
+    },
+    {
+      "orderID": 32,
+      "menuID": 3,
+      "userID": 1,
+      "eta": 2,
+      "startHour": 13,
+      "startMinute": 37,
+      "status": "Tidigare Beställning"
     }
   ]
 }

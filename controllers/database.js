@@ -31,7 +31,7 @@ function addOrder(body) {
   const order = body;
   let orderID = Math.floor(Math.random() * 100) + 1;
   let eta = Math.floor(Math.random() * 10) + 2;
-  //let time = moment().format('H:m');
+
   let startHour = parseInt(moment().format('H'));
   let startMinute = parseInt(moment().format('m'));
 
@@ -65,11 +65,13 @@ function getOrder(ID) {
   let timeBeforeMinute = database.get('orders').filter({ userID: userID }).map('startMinute').value();
   let eta = database.get('orders').filter({ userID: userID }).map('eta').value();
 
-  let timeDifference;
+  let timeDifferenceHour;
+  let timeDifferenceMinute;
 
   for (let i = 0; i < timeBeforeHour.length; i++) {
-    timeDifference = timeNowMinute - timeBeforeMinute[i];
-    if (timeDifference > eta[i]) {
+    timeDifferenceHour = timeNowHour - timeBeforeHour[i];
+    timeDifferenceMinute = timeNowMinute - timeBeforeMinute[i];
+    if (timeDifferenceMinute > eta[i] && timeDifferenceHour === 0) {
       database.get('orders').find({ status: 'Pågående Beställning' }).assign({ status: 'Tidigare Beställning' }).write();
     } else {
       database.get('orders').find({ status: 'Pågående Beställning' }).assign({ status: 'Pågående Beställning' }).write();
