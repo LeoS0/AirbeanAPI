@@ -12,7 +12,6 @@ function initiateDatabase() {
   database.defaults({ accounts: [], orders: [] }).write();
 }
 
-
 // Skapar konto och verifierar username och password
 function addAccount(body) {
   const account = body;
@@ -43,7 +42,7 @@ function addOrder(body) {
     orderID = Math.floor(Math.random() * 100) + 1;
   }
 
-// Skiss på hur dabatasen ska se ut
+  // Skiss på hur dabatasen ska se ut
   database
     .get('orders')
     .push({
@@ -57,11 +56,10 @@ function addOrder(body) {
     })
     .write();
 
-  return `Order Added. ID: ${orderID} ETA: ${eta} min`;
+  return { ID: orderID, time: eta };
 }
 
-
-// Hämtar ordrar 
+// Hämtar ordrar
 function getOrder(ID) {
   const userID = parseInt(ID);
   const orderHistory = database.get('orders').filter({ userID: userID }).value();
@@ -90,8 +88,7 @@ function getOrder(ID) {
   return orderHistory;
 }
 
-
-//Exporterar våra funktioner 
+//Exporterar våra funktioner
 exports.initiateDatabase = initiateDatabase;
 exports.addAccount = addAccount;
 exports.addOrder = addOrder;

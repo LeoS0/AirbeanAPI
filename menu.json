@@ -35,6 +35,12 @@
       "title": "Cortado",
       "desc": "Bryggd på månadens bönor.",
       "price": 39
+    },
+    {
+      "id": 7,
+      "title": "Gustav Adolfsbakelse",
+      "desc": "Göteborg fyller 400 år!",
+      "price": 40
     }
   ]
 }
